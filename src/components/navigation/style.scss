@@ -1,0 +1,16 @@
+.profile-img {
+    svg {
+        path {
+            stroke: rgba(128, 128, 128, 0.755);
+        }
+    }
+}
+
+.navigation-bar {
+    overflow-y: scroll;
+    max-height: calc(100vh - 130px);
+}
+
+.navigation-bar>ul>li:last-child {
+    margin-bottom: 12vw !important;
+}
