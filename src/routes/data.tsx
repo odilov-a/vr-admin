@@ -7,9 +7,9 @@ const Book = lazy(() => import("pages/book"));
 const BookCreate = lazy(() => import("pages/book/update"));
 const BookUpdate = lazy(() => import("pages/book/update"));
 
-const Organ = lazy(() => import("pages/book copy"));
-const OrganCreate = lazy(() => import("pages/book copy/update"));
-const OrganUpdate = lazy(() => import("pages/book copy/update"));
+const Organ = lazy(() => import("pages/organ"));
+const OrganCreate = lazy(() => import("pages/organ/update"));
+const OrganUpdate = lazy(() => import("pages/organ/update"));
 
 const LogOut = lazy(() => import("pages/logOut"));
 // const LocalizationPanel = lazy(() => import("pages/localizationPanel"));

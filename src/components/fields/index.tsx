@@ -12,6 +12,7 @@ import FileUploadDZ from "./fileUploadReact";
 import FileUploadChat from "./fileUploadChat";
 import FileUploadBanner from "./fileUploadBanner";
 import FileUpload from "./fileUploadReact2";
+import FileUploadVideo from "./fileUploadVideo";
 import Textarea from "./textarea";
 import Radio from "./radio";
 import TreeSelect from "./treeSelect";
@@ -59,4 +60,5 @@ export default {
   Ckeditor,
   FileUpload2,
   Switch,
+  FileUploadVideo,
 };

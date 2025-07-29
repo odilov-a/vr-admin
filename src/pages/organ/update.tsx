@@ -192,9 +192,9 @@ const Update = () => {
                     <div>
                       <Field
                         name="photoUrls"
-                        placeholder={t("Rasm qo'shish")}
+                        placeholder={t("360 Video qo'shish")}
                         multiple={true}
-                        component={Fields.FileUpload}
+                        component={Fields.FileUploadVideo}
                         className="mr-[30px]"
                       />
                     </div>

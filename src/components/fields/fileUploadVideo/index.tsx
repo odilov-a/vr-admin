@@ -65,8 +65,9 @@ const FileUploader: React.FC<Props> = ({
     } else {
       setFiles([]);
     }
-    if (!multiple && files.length > 0) {
-      setPreviewUrl(files[0]?.url || null);
+
+    if (!multiple && value?.url) {
+      setPreviewUrl(value.url);
     }
   }, [value, multiple]);
 
@@ -325,6 +326,7 @@ const FileUploader: React.FC<Props> = ({
         open={isModalOpen}
         footer={null}
         onCancel={() => setIsModalOpen(false)}
+        width={720}
       >
         {multiple ? (
           previewIndex >= 0 && previewIndex < files.length ? (
@@ -332,24 +334,34 @@ const FileUploader: React.FC<Props> = ({
               <video
                 src={files[previewIndex].url}
                 controls
-                className="w-full h-auto"
+                autoPlay
+                muted
+                playsInline
+                className="w-full h-auto rounded-md"
               />
             ) : (
               <img
                 src={files[previewIndex].url}
-                alt="Katta rasm"
-                className="w-full h-auto"
+                alt="Katta video"
+                className="w-full h-auto rounded-md"
               />
             )
           ) : null
         ) : files[0] ? (
           isVideo ? (
-            <video src={files[0].url} controls className="w-full h-auto" />
+            <video
+              src={files[0].url}
+              controls
+              autoPlay
+              muted
+              playsInline
+              className="w-full h-auto rounded-md"
+            />
           ) : (
             <img
               src={files[0].url}
-              alt="Katta rasm"
-              className="w-full h-auto"
+              alt="Katta video"
+              className="w-full h-auto rounded-md"
             />
           )
         ) : null}
