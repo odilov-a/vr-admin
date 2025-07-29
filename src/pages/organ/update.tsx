@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { notification, Tabs } from "antd";
+import { notification, Tabs, Select } from "antd";
 import { Button, Fields } from "components";
 import { Field } from "formik";
 import { useGet, useHooks } from "hooks";
@@ -91,7 +91,7 @@ const Update = () => {
           });
         }}
       >
-        {({ submitForm }) => {
+        {({ submitForm, setFieldValue }) => {
           return (
             <div>
               <div className="content-panel page-heading">
@@ -178,15 +178,16 @@ const Update = () => {
                   </TabPane>
                   <TabPane tab="Image" key="File">
                     <div className="flex items-center">
-                      <Field
-                        name="type"
-                        label={t("Type")}
-                        component={Fields.Select}
+                      <Select
+                        className="w-[200px] mr-[30px] mb-[40px]"
+                        value={get(data, "type")}
+                        onChange={(value) => {
+                          setFieldValue("type", value);
+                        }}
                         options={[
-                          { label: t("Erkan"), value: 1 },
+                          { label: t("Erkak"), value: 1 },
                           { label: t("Ayol"), value: 2 },
                         ]}
-                        className="mr-[30px]"
                       />
                     </div>
                     <div>
