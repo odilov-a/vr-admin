@@ -13,6 +13,11 @@ const SuperAdminMenus: MenuItem[] = [
     label: "Kitoblar",
     route: "/books",
   },
+  {
+    key: "organs",
+    label: "Organlar",
+    route: "/organs",
+  },
 
   // {
   //   key: "transactions",

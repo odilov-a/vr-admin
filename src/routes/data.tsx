@@ -7,6 +7,10 @@ const Book = lazy(() => import("pages/book"));
 const BookCreate = lazy(() => import("pages/book/update"));
 const BookUpdate = lazy(() => import("pages/book/update"));
 
+const Organ = lazy(() => import("pages/book copy"));
+const OrganCreate = lazy(() => import("pages/book copy/update"));
+const OrganUpdate = lazy(() => import("pages/book copy/update"));
+
 const LogOut = lazy(() => import("pages/logOut"));
 // const LocalizationPanel = lazy(() => import("pages/localizationPanel"));
 
@@ -48,6 +52,28 @@ const privateRoutes: IRoute[] = [
     key: "books-update",
     title: "Kitob o'zgartirish",
     element: <BookUpdate />,
+    access: ["admin"],
+  },
+
+    {
+    path: "/organs",
+    key: "organs",
+    title: "Organlar",
+    element: <Organ />,
+    access: ["admin"],
+  },
+  {
+    path: "/organs/create",
+    key: "organs-create",
+    title: "Organ qo'shish",
+    element: <OrganCreate />,
+    access: ["admin"],
+  },
+  {
+    path: "/organs/update/:id",
+    key: "organs-update",
+    title: "Organ o'zgartirish",
+    element: <OrganUpdate />,
     access: ["admin"],
   },
 
