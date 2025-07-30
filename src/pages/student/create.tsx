@@ -10,7 +10,7 @@ const Student = ({ showCreateModal, createModal }: any): JSX.Element => {
   return (
     <div>
       <Container.Form
-        url={data._id ? `/students/${get(data, "_id")}` : "/students/admin/register"}
+        url={data._id ? `/students/${get(data, "_id")}` : "/students/register"}
         method={data._id ? "put" : "post"}
         name="students"
         fields={[

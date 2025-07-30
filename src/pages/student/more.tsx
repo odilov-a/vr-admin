@@ -24,17 +24,6 @@ const More = ({ showMoreModal, moreModal }: any) => {
             </b>
           </div>
           <div className="flex items-center mb-[10px]">
-            <p className="mr-[20px]">{t("Telefon raqam")}:</p>
-            <p>
-              <a
-                href={`tel:${data.phoneNumber}`}
-                className="text-blue-500 hover:underline"
-              >
-                {data.phoneNumber}
-              </a>
-            </p>
-          </div>
-          <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">{t("Last active")}:</p>
             <b>{new Date(data.lastLogin).toLocaleString()}</b>
           </div>
@@ -43,12 +32,6 @@ const More = ({ showMoreModal, moreModal }: any) => {
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">{t("username")}:</p>
             <b>{data.username}</b>
-          </div>
-          <div className="flex items-center mb-[10px]">
-            <p className="mr-[20px]">{t("balance")}:</p>
-            <b>
-              {data.balance} {t("ball")}
-            </b>
           </div>
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">{t("email")}:</p>
@@ -62,12 +45,6 @@ const More = ({ showMoreModal, moreModal }: any) => {
             </p>
           </div>
         </div>
-      </div>
-      <div className="flex">
-        <img
-          src={data.photoUrl[0] || Avatar}
-          className="w-[200px] h-[150px] object-cover rounded-[10px]"
-        />
       </div>
     </div>
   );

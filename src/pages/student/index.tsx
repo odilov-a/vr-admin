@@ -27,23 +27,6 @@ const Student = () => {
     });
   };
 
-  const handleSearch = async (value: string) => {
-    setSearch(value);
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_ROOT_API}/students/search?search=${value}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      setFilteredItems(response.data.data);
-    } catch (err) {
-      message.error(t("Failed to fetch search results"));
-    }
-  };
-
   const deleteAction = (id: string) => {
     if (id) {
       mutate(
@@ -99,7 +82,7 @@ const Student = () => {
         footer={null}
         centered
         title={t("More informaiton")}
-        width={650}
+        width={500}
         destroyOnClose
       >
         <More {...{ showMoreModal, moreModal }} />
@@ -116,12 +99,6 @@ const Student = () => {
                     icon={<CreateDoc />}
                     title={t("Create student")}
                     onClick={() => showCreateModal({ open: true, data: {} })}
-                  />
-                  <Input.Search
-                    value={search}
-                    placeholder={t("Search students")}
-                    style={{ width: "85%", marginLeft: "20px" }}
-                    onChange={(e) => handleSearch(e.target.value)}
                   />
                 </div>
                 <Row className="h-[120px] mt-[15px]">

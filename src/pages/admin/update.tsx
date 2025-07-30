@@ -9,7 +9,7 @@ const User = ({ showEditModal, selectedCard }: any): JSX.Element => {
   return (
     <div>
       <Container.Form
-        url="/admins/update-admin"
+        url="/admins/update/me"
         name="admins"
         method="put"
         fields={[
