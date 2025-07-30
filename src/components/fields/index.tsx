@@ -4,13 +4,14 @@ import Password from "./password";
 import Select from "./select";
 import DatePicker from "./datePicker";
 import FileUploadEmpower2 from "./fileUploadEmpower2";
-import FileUpload from "./fileUpload";
+import FileUpload1 from "./fileUpload";
 import AsyncSelect from "./ant-async-select";
 import Textarea from "./textarea";
 import Switch from "./switch";
 import FileUpload3 from "./fileUpload3";
 import testUpload from "./testUpload";
 import Ckeditor from "./Ckeditor";
+import FileUpload from "./fileUploadReact2";
 
 export default {
   Input,
@@ -18,7 +19,7 @@ export default {
   Password,
   Select,
   DatePicker,
-  FileUpload,
+  FileUpload1,
   AsyncSelect,
   Textarea,
   Switch,
@@ -26,4 +27,5 @@ export default {
   FileUpload3,
   testUpload,
   Ckeditor,
+  FileUpload
 };

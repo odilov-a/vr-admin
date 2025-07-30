@@ -9,7 +9,7 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-    {
+  {
     key: "dashboard",
     label: "Dashboard",
     icon: <AppstoreOutlined />,
@@ -20,6 +20,18 @@ const menuItems: MenuItem[] = [
     label: "O'quvchilar",
     icon: <AppstoreOutlined />,
     route: "/students",
+  },
+  {
+    key: "books",
+    label: "Kitoblar",
+    icon: <AppstoreOutlined />,
+    route: "/books",
+  },
+  {
+    key: "organs",
+    label: "Organlar",
+    icon: <AppstoreOutlined />,
+    route: "/organs",
   },
 ];
 
