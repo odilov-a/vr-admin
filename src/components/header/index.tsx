@@ -34,7 +34,7 @@ const HeaderComponent = () => {
         </span>
       </div>
       <div className="flex items-center">
-        <Select
+        {/* <Select
           defaultValue={system?.lang}
           size={"large"}
           onChange={(value: any) => {
@@ -44,7 +44,7 @@ const HeaderComponent = () => {
           {config.API_LANGUAGES.map((lang) => (
             <Option value={lang?.code}>{get(lang, 'short', '')}</Option>
           ))}
-        </Select>
+        </Select> */}
         <div className="profile-dropdown">
           <div className="profile-dropdown__circle">
             <img className="profile-dropdown__avatar" src={Avatar} alt="avatar" />
