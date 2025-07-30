@@ -69,16 +69,10 @@ const Update = () => {
             value: get(data, "descriptionEn"),
           },
           {
-            type: "number",
+            type: "string",
             required: true,
-            name: "type",
-            value: get(data, "type"),
-          },
-          {
-            type: "array",
-            required: true,
-            name: "photoUrls",
-            value: get(data, "photoUrls"),
+            name: "model",
+            value: get(data, "model"),
           },
         ]}
         onSuccess={() => {
@@ -91,7 +85,7 @@ const Update = () => {
           });
         }}
       >
-        {({ submitForm, setFieldValue }) => {
+        {({ submitForm }) => {
           return (
             <div>
               <div className="content-panel page-heading">
@@ -176,29 +170,15 @@ const Update = () => {
                       />
                     </div>
                   </TabPane>
-                  <TabPane tab="Image" key="File">
-                    <div className="flex items-center">
-                      <Select
-                        className="w-[200px] mr-[30px] mb-[40px]"
-                        value={get(data, "type")}
-                        onChange={(value) => {
-                          setFieldValue("type", value);
-                        }}
-                        options={[
-                          { label: t("Erkak"), value: 1 },
-                          { label: t("Ayol"), value: 2 },
-                        ]}
-                      />
-                    </div>
-                    <div>
-                      <Field
-                        name="photoUrls"
-                        placeholder={t("360 Video qo'shish")}
-                        multiple={true}
-                        component={Fields.FileUploadVideo}
-                        className="mr-[30px]"
-                      />
-                    </div>
+                  <TabPane tab="HTML Code" key="File">
+                    <Field
+                      type="text"
+                      name="model"
+                      rows={12}
+                      placeholder={t("HTML kodini kiriting")}
+                      label={t("HTML Code")}
+                      component={Fields.Textarea}
+                    />
                   </TabPane>
                 </Tabs>
               </div>

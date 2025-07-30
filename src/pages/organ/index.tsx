@@ -50,7 +50,7 @@ const Organ = () => {
       <div className="content-panel">
         <div>
           <Container.All url="/organs" name="organs">
-            {({ meta, items }) => {
+            {({ items }) => {
               return (
                 <div>
                   <div className="page-heading">
@@ -72,23 +72,6 @@ const Organ = () => {
                         dataIndex: "name",
                         className: "w-[80px]",
                         render: (value) => <div>{value}</div>,
-                      },
-                      {
-                        key: "type",
-                        align: "center",
-                        title: t("Type"),
-                        dataIndex: "type",
-                        className: "w-[80px]",
-                        render: (value) => {
-                          const type = parseInt(value);
-                          return type === 1 ? (
-                            <span>Erkak</span>
-                          ) : type === 2 ? (
-                            <span>Ayol</span>
-                          ) : (
-                            <span>Boshqa</span>
-                          );
-                        },
                       },
                       {
                         key: "description",
