@@ -14,21 +14,7 @@ const CustomSwitch: React.FC<CustomSwitchProps> = ({
   const handleChange = (checked: boolean) => {
     form.setFieldValue(name, checked);
   };
-
-  const isChecked = () => {
-    if (typeof value === "boolean") {
-      return value;
-    }
-    if (typeof value === "string") {
-      return value.toLowerCase() === "true" || value === "1";
-    }
-    if (typeof value === "number") {
-      return value === 1;
-    }
-    return Boolean(value);
-  };
-
-  return <Switch checked={isChecked()} onChange={handleChange} {...props} />;
+  return <Switch checked={Boolean(value)} onChange={handleChange} {...props} />;
 };
 
 export default CustomSwitch;

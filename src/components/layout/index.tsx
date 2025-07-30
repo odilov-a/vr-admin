@@ -1,26 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import cx from "classnames";
 
-import { Header, Navigation } from "components";
+import { Navigation, Header, Navigation2 } from "components";
 import useStore from "store";
 
-import './style.scss'
+const { Sider, Content } = Layout;
 
 const App: React.FC = () => {
+  const [collapsed, setCollapsed] = useState(true);
   const { system } = useStore();
-  const isSidebarOpen = system.toggleSidebar !== "close";
 
   return (
-    <div className="main-layout">
-      <Navigation />
-      <div className={cx("right-layout", { shifted: !isSidebarOpen })}>
+    <Layout className="h-full">
+      <Sider
+        trigger={null}
+      >
+        <Navigation2 />
+      </Sider>
+      <Layout>
         <Header />
-        <div className="content-layout">
+        <Content className="overflow-auto p-[16px] min-h-[280px]">
           <Outlet />
-        </div>
-      </div>
-    </div>
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 

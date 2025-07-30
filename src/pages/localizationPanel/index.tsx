@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useHooks } from "hooks";
 import { Container } from "modules";
 import { Table } from "components";
@@ -7,7 +7,7 @@ import { useDebounce, usePost } from "hooks";
 import { Header } from "./components";
 
 const Localization = () => {
-  const { query, get, t } = useHooks();
+  const { get, t } = useHooks();
   const { mutate } = usePost();
   const [inputValue, setInputValue] = useState<{
     value: string;
@@ -17,19 +17,26 @@ const Localization = () => {
       en: string;
       uz: string;
     } | null;
-    changedLangCode: "uz" | "en" | "ru" | null;
+    changedLangCode: "uz" | "en" | "ru" | "kr" | null;
   }>({
     data: null,
     value: "",
     changedLangCode: null,
   });
-  const [searchWord, setSearchWord] = useState("")
+  const [searchWord, setSearchWord] = useState("");
   const inputValueDebounced = useDebounce(inputValue.value, 600);
   const inputValueDebouncedSearch = useDebounce(searchWord, 600);
   function handleTranslationInput(
     e: ChangeEvent<HTMLInputElement>,
-    data: { message: string; _id: string; en: string; uz: string, ru: string },
-    langCode: "uz" | "en" | "ru"
+    data: {
+      message: string;
+      _id: string;
+      en: string;
+      uz: string;
+      ru: string;
+      kr: string;
+    },
+    langCode: "uz" | "en" | "kr" | "ru"
   ) {
     setInputValue({
       value: e.target.value,
@@ -41,12 +48,12 @@ const Localization = () => {
   useEffect(() => {
     if (inputValue.data) {
       mutate({
-        url: `/translations/${get(inputValue.data, 'id')}`,
+        url: `/translations/${get(inputValue.data, "id")}`,
         method: "put",
         data: {
-          id: get(inputValue.data, 'id'),
+          id: get(inputValue.data, "id"),
           lang: inputValue.changedLangCode,
-          translation: inputValueDebounced
+          translation: inputValueDebounced,
         },
       });
     }
@@ -55,13 +62,12 @@ const Localization = () => {
   return (
     <div>
       <Header {...{ setSearchWord }} />
-      <h1>{t("Localization")}</h1>
       <Container.All
-        url={`translations/${inputValueDebouncedSearch && "search/" + inputValueDebouncedSearch}`}
-        name='localization'
-
+        url={`translations/${inputValueDebouncedSearch &&
+          "search/" + inputValueDebouncedSearch}`}
+        name="localization"
       >
-        {({ isLoading, meta, items }) => {
+        {({ isLoading, items }) => {
           return (
             <div>
               <Table
@@ -76,7 +82,7 @@ const Localization = () => {
                   },
                   {
                     key: "uz",
-                    title: t("O'zbek tilida"),
+                    title: t("Lotin alifbosi"),
                     dataIndex: "uz",
                     className: "class",
                     render: (value, data) => {
@@ -92,6 +98,24 @@ const Localization = () => {
                       );
                     },
                   },
+                  // {
+                  //   key: "kr",
+                  //   title: t("Kiril alifbosi"),
+                  //   dataIndex: "kr",
+                  //   className: "class",
+                  //   render: (value, data) => {
+                  //     return (
+                  //       <div>
+                  //         <Input
+                  //           defaultValue={value}
+                  //           onChange={(e) => {
+                  //             handleTranslationInput(e, data, "kr");
+                  //           }}
+                  //         />
+                  //       </div>
+                  //     );
+                  //   },
+                  // },
                   {
                     key: "en",
                     title: t("Ingliz tilida"),
@@ -126,7 +150,7 @@ const Localization = () => {
                   },
                 ]}
                 isLoading={isLoading}
-              // meta={meta}
+                // meta={meta}
               />
             </div>
           );

@@ -10,7 +10,6 @@ const queryBuilder = (
     append = "",
     limit = 0,
     sort = "",
-    search = "",
     filter = {},
     page = 1,
     extra = {},
@@ -30,16 +29,12 @@ const queryBuilder = (
     queryObj.append(append);
   }
 
-  if (limit) {
-    queryObj.param("limit", limit);
+  if (limit > 0) {
+    queryObj.param("perPage", Number(limit));
   }
 
   if (sort) {
     queryObj.sort(sort);
-  }
-
-  if (search) {
-    queryObj.param(search);
   }
 
   if (Object.keys(filter).length) {

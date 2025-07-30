@@ -33,6 +33,7 @@ const AsyncSelect: React.FC = (props: any) => {
 
   const { get } = useHooks()
 
+  const [fetchedData, setFetchedData] = useState<DataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
 
@@ -56,8 +57,8 @@ const AsyncSelect: React.FC = (props: any) => {
   })
 
   return (
-    <div className={rootClassName + ' input relative my-asyncselect-wrapper'}>
-      {label ? <p className="text-[#9EA3B5] font-[500] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[12px]">{label}</p> : null}
+    <div className={rootClassName + ' input relative'}>
+      {label ? <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[12px]">{label}</p> : null}
       <Select
         onMenuOpen={() => {
           refetch()

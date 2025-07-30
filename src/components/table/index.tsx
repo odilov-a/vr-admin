@@ -1,22 +1,21 @@
 import React, { useCallback, useState } from 'react';
-import { Pagination, Space, Table, Tag } from 'antd';
+import { Space, Table, Tag } from 'antd';
 import type { PaginationProps, TableColumnsType } from 'antd';
 import { TMeta } from 'services/types';
 import { useHooks } from 'hooks';
 
 interface IProps {
-  items: any[]
-  columns: TableColumnsType<any>,
-  hasPagination?: boolean
-  meta?: TMeta
-  isLoading?: boolean
+    items: any[]
+    columns: TableColumnsType<any>,
+    hasPagination?: boolean
+    meta?: TMeta
+    isLoading?: boolean
 }
 
 const TableComponent = (props: IProps) => {
-  const { columns, items, hasPagination = true, isLoading, meta } = props
-  const { get, query, navigate, qs } = useHooks()
+  const {columns, items, hasPagination = true, meta, isLoading} = props
+  const {get, query, navigate, qs} = useHooks()
   const [current, setCurrent] = useState<number>(1);
-  const [page, setPage] = useState<number>(1);
   const onChange = useCallback(
     (pagination: PaginationProps) => {
       navigate({
@@ -29,34 +28,40 @@ const TableComponent = (props: IProps) => {
     },
     [navigate, query]
   );
-
+  
   return (
-    <>
-      <Table
-        columns={columns}
-        dataSource={items}
-        rowKey={'id'}
-        onChange={(page: any) => {
-          if (meta) {
-            onChange(page)
-          } else {
-            setCurrent(page.current)
+        <Table
+          columns={columns} 
+          dataSource={items} 
+          rowKey={'id'} 
+          pagination={
+            hasPagination
+              ? meta
+                ? {
+                    disabled: isLoading,
+                    position: ["bottomRight"],
+                    current: +get(query, "page", 1),
+                    total: +get(meta, "totalCount", 0),
+                    pageSize: +get(query, "limit", get(meta, "perPage")),
+                  }
+                : {
+                    position: ["bottomRight"],
+                    current: current,
+                    total: items.length,
+                    pageSize: 10,
+                  }
+              : false
           }
-        }}
-        loading={isLoading}
-      />
-      {meta && meta.perPage && (
-        <div className="pt-[20px] flex justify-end">
-          <Pagination
-            current={meta.currentPage}
-            pageSize={meta.perPage}
-            total={meta.totalCount}
-            onChange={setPage}
-          />
-        </div>
-      )}
-    </>
-  )
+          onChange={(page: any) => {
+            if(meta) {
+              onChange(page)
+            } else {
+              setCurrent(page.current)
+            }
+          }} 
+          loading={isLoading}
+        />
+      )
 };
 
 export default TableComponent;

@@ -1,78 +1,69 @@
-import { Dropdown, Layout, Select } from "antd";
-import type { MenuProps } from 'antd';
+import React from "react";
+import { Layout, Select } from "antd";
 import i18next from "i18next";
-
-import config from "config";
 import { useHooks } from "hooks";
 import useStore from "store";
-import { privateRoutes, IRoute } from "routes/data";
+import { privateRoutes } from "routes/data";
+import config from "config";
 
-import { Logout } from "assets/images/icons";
-import { utils } from "services";
+import Avatar from 'assets/images/27470334_7309681.jpg'
+import Arrow from 'assets/images/dropdown-arrow.svg'
 import './style.scss'
+import { Link } from "react-router-dom";
+import { storage } from "services";
 
 const { Header } = Layout;
 
 const HeaderComponent = () => {
-  const { get, location, t, navigate, params } = useHooks();
-  const {
-    system,
-    auth: { data },
-  } = useStore();
+  const { get, location, t, navigate } = useHooks();
+  const { system } = useStore();
   const { Option } = Select;
-
-  const id = get(params, "id")
+  const menus = privateRoutes.find((m) => m.path === get(location, "pathname"));
+  const { logOut } = useStore((state) => state);
 
   const changeLang = (langCode: string) => {
     i18next.changeLanguage(langCode);
+    window.location.reload();
   };
-
-  const handleMenuClick: MenuProps['onClick'] = (e) => {
-    navigate(e.key);
-  };
-
-  const items: MenuProps['items'] = [
-    {
-      label: 'Profile',
-      key: '/profile',
-      // icon: <UserCircle />,
-    },
-    {
-      label: 'Logout',
-      key: '/logout',
-      icon: <Logout />,
-    }
-  ];
-
-  const menuProps = {
-    items,
-    onClick: handleMenuClick,
-  };
-
-  const findRouteTitle = (pathname: string, routes: IRoute[]): string => {
-    const cleanPath = pathname.includes('/') && /\/\d+$/.test(pathname)
-      ? pathname.substring(0, pathname.lastIndexOf('/'))
-      : pathname;
-    const route = routes.find(route => {
-      const routePath = route.path.includes(':')
-        ? route.path.substring(0, route.path.lastIndexOf('/'))
-        : route.path;
-      return routePath === cleanPath;
-    });
-    return route?.title || '';
-  };
-
-  const pathname = get(location, "pathname");
-  const title = findRouteTitle(pathname, privateRoutes);
 
   return (
-    <Header className="header flex justify-between items-center px-[30px] bgc-[#fff]">
-      <div className="relative tabs-icons">
-        <span className="header-title font-[500] text-[16px] text-[#77828A]">
-          {title}
+    <Header className="flex justify-between items-center bg-[#fff] dark:bg-[#222638] p-0 pr-[20px]">
+      <div>
+        <span className="font-[500] text-[20px] dark:text-[#9EA3B5] text-black ml-[48px]">
+          {t(get(menus, 'title', ""))}
         </span>
       </div>
-    </Header>
+      <div className="flex items-center">
+        <Select
+          defaultValue={system?.lang}
+          size={"large"}
+          onChange={(value: any) => {
+            changeLang(value);
+          }}
+        >
+          {config.API_LANGUAGES.map((lang) => (
+            <Option value={lang?.code}>{get(lang, 'short', '')}</Option>
+          ))}
+        </Select>
+        <div className="profile-dropdown">
+          <div className="profile-dropdown__circle">
+            <img className="profile-dropdown__avatar" src={Avatar} alt="avatar" />
+            <img className="profile-dropdown__arrow" src={Arrow} alt="arrow" />
+          </div>
+          <div className="profile-dropdown__options">
+            <p className="profile-dropdown__item profile-dropdown__info">{t("Admin")}</p>
+            <Link className="profile-dropdown__item profile-dropdown__link" to="/profile">{t("Profile")}</Link>
+            <p className="profile-dropdown__item profile-dropdown__link" onClick={() => (
+              logOut(),
+              storage.remove("token"),
+              navigate("/")
+            )}>
+              {t("Log out")}
+            </p>
+          </div>
+        </div>
+      </div>
+    </Header >
   );
 };
 

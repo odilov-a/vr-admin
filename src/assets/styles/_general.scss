@@ -65,11 +65,9 @@ html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
 }
-
 body {
   margin: 0;
 }
-
 main {
   display: block;
 }
@@ -92,50 +90,104 @@ ul {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #1677ff;
+  background-color: #3367f6;
 }
 
-.center-margin {
-  margin: 0 auto;
+::selection {
+  background-color: #3367f6;
+  color: #ffffff;
 }
 
-.content-panel {
-  padding: 24px;
-  background-color: #fff;
-  border-radius: 16px;
+// Animation
+
+.reveal {
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: all 2s ease;
 }
 
-.content-panel-title {
-  color: var(--White-and-Dark-Dark, #02080d);
-  font-family: Inter;
+.reveal.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.ant-layout-content {
+  background-color: #fcfdff !important;
+}
+
+.ant-menu-inline-collapsed {
+  .sidebar-logo {
+    transition: all ease 0.3s;
+    margin-left: 2px !important;
+  }
+}
+
+.ant-layout-sider-children {
+  background-color: #f5f5f5;
+  ul {
+    border-right: 2px solid #e6ecfe !important;
+    padding: 10px;
+  }
+}
+
+.btnPanel {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+
+  .editBtn {
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 6px 7px 8px 9px;
+    background-color: #9ea3b5;
+    margin-right: 10px;
+  }
+
+  .deleteBtn {
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 7px 10px 9px 9px;
+    background-color: #ffa39e;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.navbar-menuitem {
+  color: #000;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 130%; /* 20.8px */
+  padding: 15px 15px 0 30px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 20px;
+  }
+}
+
+.navbar-menuitem-actived {
+  color: #3367f6;
+
+  svg {
+    fill: #3367f6;
+  }
 }
 
 .page-heading {
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
-  padding: 13px 16px;
-  background-color: #fff;
-  border-radius: 8px;
-
-  svg {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-    path {
-      stroke: #1677ff;
-    }
-  }
 
   &__title {
-    color: var(--Black, #000019);
-    font-family: "Inter";
-    font-size: 18px;
-    font-weight: 500;
+    color: #02080d;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2;
   }
 
   &__subtitle {
@@ -156,92 +208,4 @@ ul {
       width: 250px;
     }
   }
-}
-
-// .ant-table-row:nth-child(even) {
-//   // background-color: #f5f5f5;
-// }
-
-.ant-table-row:last-child {
-  border-color: #f5f5f5;
-  border-radius: 0 0 6px 6px !important;
-}
-
-.ant-table-thead {
-  .ant-table-cell {
-    padding: 10px !important;
-    // background-color: #e6e8ea !important;
-    color: #77828a !important;
-    border-radius: 12px 12px 0px 0px !important;
-    border-bottom: 1px solid var(--Gray-Gray-3, #c9c9c9) !important;
-
-    &:before {
-      display: none;
-    }
-  }
-}
-
-.ant-table-cell {
-  padding: 10px !important;
-}
-
-.ant-modal-confirm-btns {
-  .ant-btn-default {
-    &:hover {
-      border-color: #1677ff !important;
-      color: #1677ff !important;
-    }
-  }
-
-  .ant-btn-primary {
-    color: #fff;
-    background: #1677ff;
-    &:hover {
-      background-color: #1677ff !important;
-      color: #fff !important;
-    }
-    &:focus {
-      color: #fff;
-      background: #1677ff;
-    }
-    &:focus-visible {
-      outline: 4px solid #ffc691;
-    }
-    &:active {
-      color: #fff;
-      background: #1677ff;
-    }
-    &:focus-within {
-      color: #fff;
-      background: #1677ff;
-    }
-  }
-}
-
-::selection {
-  background: #1677ff;
-  color: #fff;
-}
-
-::-moz-selection {
-  background: #1677ff;
-  color: #fff;
-}
-
-.short-text {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-a {
-  &:hover {
-    color: #1677ff;
-  }
-}
-
-.logo-text {
-  font-weight: 400;
-  font-size: 26px;
-  color: #1677ff;
 }

@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Upload, message } from "antd";
-import { VideoCameraOutlined } from "@ant-design/icons";
-import { UploadFile, UploadProps } from "antd";
+import React, { useRef, useState } from "react";
+import { PlusOutlined } from "@ant-design/icons";
+import { Modal, Upload } from "antd";
+import { GetProp, UploadFile, UploadProps, message } from "antd";
 import { FieldProps } from "formik";
-import axios from "axios";
-import { UploadImagePlus } from "assets/images/icons";
+import { usePost, useHooks } from "hooks";
 import { storage } from "services";
 
-type FileType = File;
+type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
-// Base64ga o'girish uchun utility function
 const getBase64 = (file: FileType): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -18,44 +16,49 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.onerror = (error) => reject(error);
   });
 
-interface Props extends FieldProps {
+interface Props extends FieldProps<any, any> {
   label?: string;
   className?: string;
-  errorMessage?: string;
-  limit?: number;
-  isVideo?: boolean;
-  onSuccess?: () => void;
-  accept?: string;
+  errorMessage?: string | any;
+  rootClassName?: string;
+  limit: number;
+  listType: any;
+  successed: boolean;
+  setSuccess: any;
+  customDelete: boolean;
+  onSuccess: () => void;
+  hasSuccess: boolean;
 }
 
-const FileUploader: React.FC<Props> = ({
-  form: { setFieldValue },
-  field: { name, value },
-  className,
-  label,
-  limit = 1,
-  isVideo = false,
-  onSuccess = () => {},
-  accept,
-}) => {
+const App = (props: Props) => {
+  const { get, t } = useHooks();
+  const { mutate } = usePost();
+  const isDark = useState(storage.get("theme") == "light" ? false : true);
+  const uploadRef = useRef<any>(null);
+
+  const {
+    form: { setFieldValue, values },
+    field: { name, value },
+    className,
+    successed,
+    setSuccess,
+    label,
+    limit = 1,
+    listType,
+    onSuccess = () => { },
+    hasSuccess = false,
+    customDelete = true,
+  } = props;
+
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-
-  // Initial value bo'lsa uni fileList ga set qilish
-  useEffect(() => {
-    if (value?.url) {
-      setFileList([
-        {
-          uid: value.name || "-1",
-          name: value.name || "file",
-          status: "done",
-          url: value.url,
-        },
-      ]);
-    }
-  }, [value]);
+  const [fileList, setFileList] = useState<UploadFile[]>(get(values, name) ? [{
+    uid: get(values, "_id",),
+    name: get(values, "productTitle"),
+    status: 'done',
+    url: get(values, name,  'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'),
+  }] : []);
 
   const handleCancel = () => setPreviewOpen(false);
 
@@ -75,87 +78,38 @@ const FileUploader: React.FC<Props> = ({
     setFileList(newFileList);
   };
 
-  const customRequest = async ({
-    file,
-    onSuccess: uploadSuccess,
-    onError,
-  }: any) => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await axios.post(
-        `${process.env.REACT_APP_ROOT_API_FILE_UPLOAD}/files/upload`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${storage.get("token")}`,
-          },
-        }
-      );
-
-      if (response.status === 200 || response.status === 201) {
-        const fileData = response.data.data;
-        isVideo
-          ? setFieldValue(name, fileData.url.toString())
-          : setFieldValue(name, { url: fileData.url, id: fileData.name });
-        message.success("File muvaffaqiyatli yuklandi");
-        uploadSuccess();
-        onSuccess();
-      }
-    } catch (error) {
-      console.error("File yuklashda xatolik:", error);
-      message.error("File yuklanmadi");
-      onError(error);
-    }
-  };
-
   const uploadButton = (
-    <div className={`upload-button ${isVideo ? "video-upload" : ""}`}>
-      {isVideo ? (
-        <div className="flex flex-col items-center justify-center cursor-pointer border border-[#d9d9d9] rounded-[8px] w-[102px] h-[102px]">
-          <VideoCameraOutlined className="text-lg" />
-          <span className="mt-1 text-xs">Video yuklash</span>
-        </div>
-      ) : (
-        <div className="flex flex-col items-center">
-          <UploadImagePlus />
-          <div className="mt-2">Rasm qo'shish</div>
-        </div>
-      )}
-    </div>
+    <button style={{ border: 0, background: "none" }} type="button">
+      <PlusOutlined style={isDark ? { color: "#002855" } : { color: "#002855" }} />
+      <div className="mt-[8px] dark:text-[#002855]">{t("Upload")}</div>
+    </button>
   );
 
   return (
-    <div className={className + " default-file-upload"}>
-      {label && <div className="mb-2">{label}</div>}
+    <>
       <Upload
-        listType={isVideo ? "text" : "picture-card"}
+        listType="picture-card"
+        ref={uploadRef}
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
-        customRequest={customRequest}
-        accept={accept || (isVideo ? "video/*" : "image/*")}
-        maxCount={limit}
+        beforeUpload={(file) => {
+          setFieldValue(name, file)
+          return false;
+        }}
       >
-        {fileList.length >= limit ? null : uploadButton}
+        {fileList.length >= 1 ? null : uploadButton}
       </Upload>
-
       <Modal
         open={previewOpen}
         title={previewTitle}
         footer={null}
         onCancel={handleCancel}
       >
-        {isVideo ? (
-          <video controls style={{ width: "100%" }} src={previewImage} />
-        ) : (
-          <img alt="preview" style={{ width: "100%" }} src={previewImage} />
-        )}
+        <img alt="example" style={{ width: "100%" }} src={previewImage} />
       </Modal>
-    </div>
+    </>
   );
 };
 
-export default FileUploader;
+export default App;

@@ -19,36 +19,25 @@ interface Props {
   onError?: (error: any) => void;
   queryOptions?: UseQueryOptions<any, any, any, any>;
   params?: TParams | undefined;
-  enabled?: boolean;
 }
 
 async function get({ queryKey }: QueryFunctionContext<[string, QueryKeyArgs]>) {
   const { url, params } = queryKey[1];
+
   const res = await api.get(queryBuilder(url, params));
   return res.data;
 }
-
 function useGet(args: Props): UseQueryResult {
-  const { 
-    name, 
-    onSuccess, 
-    onError, 
-    queryOptions, 
-    url, 
-    params, 
-    enabled = true
-  } = args;
+  const { name, onSuccess, onError, queryOptions, url, params } = args;
 
   const data = useQuery({
     queryKey: [`${name}`, { url, params }],
     queryFn: get,
     onSuccess,
     onError,
-    enabled,
     ...queryOptions,
   });
 
   return { ...data };
 }
-
 export default useGet;

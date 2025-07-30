@@ -8,7 +8,9 @@ const api = axios.create({
 });
 
 api.defaults.params = {};
-api.defaults.params["lang"] = storage.get("i18nextLng") ? storage.get("i18nextLng") : "uz";
+api.defaults.params["lang"] = storage.get("i18nextLng")
+  ? storage.get("i18nextLng")
+  : "uz";
 api.defaults.headers.common["Accept"] = "application/json";
 api.defaults.headers.common["Content-Type"] = "application/json; charset=utf-8";
 // api.defaults.params['lang'] = storage.getItem("i18nextLng") ? storage.getItem("i18nextLng") : "uz";
@@ -16,7 +18,6 @@ api.defaults.headers.common["Content-Type"] = "application/json; charset=utf-8";
 api.interceptors.request.use(
   (configs) => {
     configs.headers.Authorization = `Bearer ${storage.get("token")}`;
-    configs.headers._l = `${storage.get("i18nextLng") ? storage.get("i18nextLng") : "uz"}`;
     return configs;
   },
   (error) => {

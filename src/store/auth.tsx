@@ -48,7 +48,6 @@ export const authSlice: StateCreator<IAuthSlice, [], []> = (
     },
     logOut: () => {
       return set((state: { [key: string]: any }) => {
-        storage.remove("token");
         return {
           auth: {
             ...get(state, "auth"),

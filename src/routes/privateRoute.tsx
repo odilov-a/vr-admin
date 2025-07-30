@@ -4,7 +4,8 @@ import useStore from "store";
 function Private({ children }: { children: any }) {
   const {
     auth: { isLoggedIn, token },
-  } = useStore();
+  } = useStore((state) => state);
+
 
   if (isLoggedIn) {
     return <>{children}</>;

@@ -2,8 +2,7 @@ export type TParams = {
   fields?: object[];
   include?: string | string[];
   append?: string | string[];
-  limit?: number | string;
-  search?: string | null;
+  limit?: number;
   sort?: string | null;
   filter?: {
     [key: string]: number | string | boolean | [] | object | undefined | null;

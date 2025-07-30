@@ -2,26 +2,32 @@ import Layout from "./layout";
 import Header from "./header";
 import Fields from "./fields";
 import Navigation from "./navigation";
+import Navigation2 from "./navigation2";
 import Table from "./table";
 import Modal from "./modal";
 import Button from "./button";
-import DotBtn from "./dotBtn";
 import Img from "./img";
-import YearlyDate from "./yearlyCalendar";
-import SkeletonTable from "./skeletonTable";
-import ModalRight from "./modalRight";
+import DotBtn from "./DotBtn"
+
+import {
+  AntInput,
+  AntTextarea,
+  AntSelect,
+  AntTimePicker,
+  AntPassword,
+  AntTreeSelect,
+  AntInputNumber,
+  AntRadio
+} from "./AntFields";
 
 export {
-  Layout,
-  Header,
-  Fields,
-  Navigation,
-  Table,
-  Modal,
-  Img,
-  Button,
-  DotBtn,
-  YearlyDate,
-  SkeletonTable,
-  ModalRight
+  Layout, Header, Fields, Navigation, Navigation2, Table, Modal, Img, Button, AntInput,
+  AntTextarea,
+  AntSelect,
+  AntTimePicker,
+  AntPassword,
+  AntTreeSelect,
+  AntInputNumber,
+  AntRadio,
+  DotBtn
 };

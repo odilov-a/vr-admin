@@ -40,7 +40,6 @@ const Scroll = ({
     onError,
     queryOptions,
   });
-
   useEffect(() => {
     if (!customMoreBtn) {
       if (inView && data.hasNextPage) {

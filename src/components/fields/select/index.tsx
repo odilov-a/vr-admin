@@ -22,18 +22,17 @@ const AsyncSelect: React.FC = (props: any) => {
   } = props
 
   return (
-    <div className={rootClassName + ' input relative my-select-wrapper'}>
-      {label ? <p className="py-[6px] inline-block mb-[8px] font-[500]">{label}</p> : null}
+    <div className={rootClassName + ' input relative'}>
+      {label ? <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[12px]">{label}</p> : null}
       <Select
-        value={options.find((option: any) => option.value === values[name])}
-        // value={!isMulti ? options.find((option: any) => option.value === values[name]) : get(values, name)}
+        value={!isMulti ? options.find((option: any) => option.value === values[name]) : get(values, name)}
         getOptionLabel={option => option[optionLabel]}
         getOptionValue={option => option[optionValue]}
         key={name}
         required={required}
         options={options}
         placeholder={placeholder}
-        className={"my-select " + className}
+        className={className}
         onChange={option => {
           onChange(option)
           setFieldValue(name, option)

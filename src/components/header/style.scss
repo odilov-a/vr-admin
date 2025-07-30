@@ -1,175 +1,64 @@
-.profile-panel {
-  display: flex;
-  align-items: center;
-  margin-left: 44px;
-  margin-right: 24px;
+.profile-dropdown {
+  margin-left: 30px;
   position: relative;
-  .profile-name {
-    color: #090e14;
-    text-align: right;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 130%;
-  }
+  cursor: pointer;
+  padding: 8px;
 
-  .profile-info {
-    margin-right: 12px;
-  }
-
-  .profile-role {
-    color: var(--Greys-Grey-1, #77828a);
-    text-align: right;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 130%;
-  }
-
-  .profile-avatar {
-    width: 40px;
-    height: 40px;
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
+  &:hover {
+    .profile-dropdown__options {
+      opacity: 1;
+      transform: translateY(-5px);
     }
+  }
 
+  &__circle {
+    display: flex;
+  }
+
+  &__avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+  }
+
+  &__arrow {
+    margin-left: -10px;
+  }
+
+  &__options {
+    position: absolute;
+    background-color: #ececec;
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.05);
+    width: 120px;
+    right: 20px;
+    margin-top: 10px;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(-300px);
+    // transition: all 400ms cubic-bezier(0, 0.3, 0.69, 1.91);
+    transition: all 400ms cubic-bezier(0, 0.3, 0.69, 1.0);
+  }
+
+  &__info {
+    border-bottom: 1px solid #dcdde0;
+    background-color: #fff;
+    border-radius: 4px;
+    line-height: 20px !important;
+  }
+
+  &__item {
+    display: block;
+    padding: 10px;
+    line-height: 10px;
+  }
+
+  &__link {
+    transition: all ease 0.3s;
+    margin-top: 5px;
     &:hover {
+      color: #002855;
     }
-  }
-
-  .profile-menu {
-    background-color: #d9dfe3;
-    color: #000;
-    position: absolute;
-    transform: translate(-36%, -100%);
-    width: 100px;
-    border-radius: 10px;
-    line-height: normal;
-
-    div {
-      cursor: pointer;
-      padding: 10px 15px;
-    }
-  }
-
-  .profile-menu-opened {
-    background-color: #d9dfe3;
-    color: #000;
-    position: absolute;
-    width: 100px;
-    border-radius: 10px;
-    line-height: normal;
-    transform: translate(-36%, 84%);
-  }
-
-  .profile-arrow {
-    cursor: pointer;
-  }
-}
-
-.ant-select-selector {
-  padding-left: 30px !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding-right: 15px !important;
-  &:focus {
-    border: none !important;
-    box-shadow: none !important;
-  }
-  &::before {
-    content: "";
-    position: absolute;
-    left: 7px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    background-image: url("../../assets/images/icons/language.svg");
-    background-size: cover;
-  }
-
-  .ant-select-selection-item {
-    color: #77828a;
-  }
-}
-
-.tabs-icons {
-  color: #fff;
-  svg {
-    path {
-      stroke: #fff;
-    }
-  }
-}
-
-.header-tabs {
-  display: flex;
-}
-
-.header-tabs__tab {
-  display: flex;
-  align-items: center;
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: #fff;
-  border: 1px solid #c9c9c9;
-  padding: 8px 20px;
-  margin-right: 8px;
-  transition: all ease 0.3s;
-
-  .header-tabs__tab-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    fill: #000;
-    path {
-      stroke: #000;
-    }
-  }
-
-  .header-tabs__tab-title {
-    font-size: 13px;
-    color: #000;
-    margin-left: 6px;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-}
-
-.header-tabs__tab--active {
-  display: flex;
-  align-items: center;
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: #7635e9;
-  border: 1px solid #7635e9;
-  padding: 8px 20px;
-  margin-right: 8px;
-  transition: all ease 0.3s;
-
-  .header-tabs__tab-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    fill: #fff;
-  }
-
-  .header-tabs__tab-title {
-    font-size: 13px;
-    color: #fff;
-    margin-left: 6px;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
   }
 }

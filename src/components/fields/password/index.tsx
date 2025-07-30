@@ -24,28 +24,27 @@ const MyInput = (props: IProps) => {
     rootClassName = "",
   } = props;
 
-  const touchedV = touched[name];
-  const hasError = errors[name];
-  const touchedError = hasError && touchedV;
-  const onBlur = (e: any) => {
-    setFieldTouched(name, !!e.target.value);
-  };
+  const [obtValue, setObtValue] = useState<string>('')
 
   return (
     <div className={rootClassName + " input"}>
-      {label ? <p className="py-[6px] inline-block mb-[8px] font-[500]">{label}</p> : null}
+      {label ? <p className='input__label'>{label}</p> : null}
       <Input.Password
         size={size}
         required={required}
         placeholder={placeholder}
         name={name}
-        status={touchedError ? "error" : ""}
+        // status={!!touched[name] ? "error" : ""}
+        status={!obtValue.length ? "error" : ""}
         value={value}
         onChange={(e) => {
           setFieldValue(name, e.target.value);
+          setObtValue(e.target.value)
         }}
-        onBlur={onBlur}
-        className={className}
+        onBlur={(e) => {
+          setFieldTouched(name, true);
+        }}
+        className={className + " py-[10px] px-[15px] border-2 rounded-[12px]"}
       />
       <p className="mt-[5px] text-[#ff4d4f]">
         {errors[name] && touched[name] ? (

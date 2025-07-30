@@ -14,7 +14,7 @@ interface IConfig {
 }
 
 const config: IConfig = {
-  APP_NAME: "STARTER",
+  APP_NAME: "TEST APP",
   API_ROOT: process.env.REACT_APP_ROOT_API || "",
   STATIC_FILES_DIR: process.env.REACT_APP_ROOT_STATIC_FILES_DIR || "",
   DEFAULT_LANGUAGE: "uz",

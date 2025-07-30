@@ -1,0 +1,24 @@
+body.dark {
+  .ant-layout-content {
+    background-color: #3367F6 !important;
+  }
+
+  .ant-modal-content {
+    background-color: #3367F6 !important;
+  }
+
+  .ant-modal-title {
+    background-color: #3367F6 !important;
+    color: #9EA3B5 !important;
+  }
+
+  .ant-layout-sider-children {
+    ul {
+      border-right: 2px solid #3367F6 !important;
+    }
+  }
+
+  .ant-modal-close-x {
+    color: #9EA3B5 !important; /* Set your desired color here */
+  }
+}

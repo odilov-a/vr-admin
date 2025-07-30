@@ -1,28 +1,32 @@
 import { useRef, useState, useEffect } from "react";
-import { Delete, Dots, Edit, View } from "assets/images/icons"
+import { Delete, Dots, EditProblem } from "assets/images/icons";
 import { useHooks } from "hooks";
 
-const DotButton = ({ row, editFunction, deleteFunction, viewFunction }: any) => {
-  const { t, get } = useHooks()
+const DotButton = ({ row, editFunction, deleteFunction }: any) => {
+  const { t, get } = useHooks();
   const dropdownRef = useRef(null);
   const [opentActionMenu, setOpenActionMenu] = useState<Number | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current &&
-        !(dropdownRef.current as any).contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !(dropdownRef.current as any).contains(event.target)
+      ) {
         setOpenActionMenu(null);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
   const handleToggleMenu = () => {
-    setOpenActionMenu(opentActionMenu === get(row, "_id") ? null : get(row, "_id", null));
+    setOpenActionMenu(
+      opentActionMenu === get(row, "_id") ? null : get(row, "_id", null)
+    );
   };
 
   const handleEdit = () => {
@@ -35,27 +39,24 @@ const DotButton = ({ row, editFunction, deleteFunction, viewFunction }: any) => 
     setOpenActionMenu(null);
   };
 
-  const handleView = () => {
-    viewFunction && viewFunction();
-    setOpenActionMenu(null);
-  };
-
   return (
     <div>
       <div className="action-menu-wrapper" ref={dropdownRef}>
         <div
-          className={`dot-btn ${opentActionMenu === get(row, "_id") ? "dot-btn--actived" : ""}`}
+          className={`dot-btn ${
+            opentActionMenu === get(row, "_id") ? "dot-btn--actived" : ""
+          }`}
           onClick={handleToggleMenu}
         >
           <Dots />
         </div>
-        <div className={`action-menu ${opentActionMenu === get(row, "_id") ? "action-menu--opened" : ""}`}>
-          {viewFunction && <div className="action-menu__item" onClick={handleView}>
-            <View />
-            <p>{t("Ko'rish")}</p>
-          </div>}
+        <div
+          className={`action-menu ${
+            opentActionMenu === get(row, "_id") ? "action-menu--opened" : ""
+          }`}
+        >
           <div className="action-menu__item" onClick={handleEdit}>
-            <Edit />
+            <EditProblem />
             <p>{t("Tahrirlash")}</p>
           </div>
           <div className="action-menu__item" onClick={handleDelete}>
@@ -65,7 +66,7 @@ const DotButton = ({ row, editFunction, deleteFunction, viewFunction }: any) => 
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DotButton
+export default DotButton;

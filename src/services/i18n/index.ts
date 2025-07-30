@@ -10,11 +10,12 @@ i18next
   .use(LanguageDetector)
   .use(HttpBackend)
   .init({
-    fallbackLng: storage.get("i18nextLng") ?? "uz",
-    supportedLngs: ["uz","ru","en"],
+    fallbackLng: storage.get("i18nextLng") || "uz",
+    lng: storage.get("i18nextLng") || "uz",
+    supportedLngs: ["ru", "uz", "en"],
     saveMissing: false,
     interpolation: {
-      escapeValue: false,
+      escapeValue: true,
     },
     backend: {
       addPath: config.API_ROOT + "/translations/{{lng}}",

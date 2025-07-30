@@ -3,6 +3,7 @@ import {
   UseQueryOptions,
   useInfiniteQuery,
 } from "@tanstack/react-query";
+import { get } from "lodash";
 import qs from "qs";
 import { api, queryBuilder } from "services";
 import { TParams } from "services/types";
@@ -15,19 +16,22 @@ interface IUseInfiniteScroll {
   queryOptions?: UseQueryOptions<any, any, any, any>;
   params?: TParams | undefined;
   dataKey?: string;
-  search?: string;
 }
-
 const fetchProjects = async ({ pageParam = 1, queryKey }: any) => {
-  const { url, params, search } = queryKey[1].args;
+  const { url, params } = queryKey[1].args;
 
-  const res = await api.get(queryBuilder(url, { page: pageParam, ...params, extra: { search: search } }));
+  const res = await api.get(queryBuilder(url, { page: pageParam, ...params }));
 
   const newData = {
     ...res?.data,
     next: res?.data?._links?.next,
     previous: res?.data?._links?.first,
   };
+  // const newData = {
+  //   ...res?.data,
+  //   next: res?.data?._links?.next?.href,
+  //   previous: res?.data?._links?.first?.href,
+  // };
 
   return newData;
 };

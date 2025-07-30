@@ -1,12 +1,9 @@
 
-
 import { ChangeEvent } from "react";
 import { FieldProps } from "formik";
 import ReactQuill from "react-quill";
 import cx from "classnames";
 import "react-quill/dist/quill.snow.css";
-
-import "./style.scss";
 
 interface IProps extends FieldProps<any, any> {
   placeholder?: string;
@@ -43,7 +40,7 @@ const MyInput = (props: IProps) => {
 
   return (
     <div className={rootClassName + " input relative"}>
-      {label ? <p className="py-[6px] inline-block mb-[8px] font-[500]">{label}</p> : null}
+      {label ? <p className="py-[6px] inline-block mb-[8px]">{label}</p> : null}
       <ReactQuill
         value={value}
         

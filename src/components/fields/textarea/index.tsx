@@ -51,7 +51,7 @@ const MyInput = (props: IProps) => {
 
   return (
     <div className={rootClassName + " input relative"}>
-      {label ? <p className="py-[6px] inline-block mb-[8px] font-[500]">{label}</p> : null}
+      {label ? <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[12px]">{label}</p> : null}
       <TextArea
         size={size}
         placeholder={placeholder}

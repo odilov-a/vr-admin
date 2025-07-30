@@ -7,27 +7,20 @@ export type TTheme = "dark" | "light";
 export interface ISystemInitialState {
   lang: string;
   theme: TTheme;
-  toggleSidebar: string | null;
-  attemptStatus: string | null;
+  loginId: string | null;
 }
 
 export const SystemInitialState: ISystemInitialState = {
   lang: storage.get("i18nextLng") || "uz",
   theme: "light",
-  toggleSidebar: storage.get("toggleSidebar")
-    ? storage.get("toggleSidebar")
-    : "false",
-  attemptStatus: storage.get("attemptStatus")
-    ? storage.get("attemptStatus")
-    : "200",
+  loginId: JSON.parse(storage.get("loginId") || "null"),
 };
 
 export interface ISystem {
   system: ISystemInitialState;
   setLang: (action: { [key: string]: any }) => void;
   changeTheme: (data: string) => any;
-  toggleSidebar: (data: string) => any;
-  attemptStatus: (data: string) => any;
+  setLoginId: (data: any) => any;
 }
 
 export const systemSlice: StateCreator<ISystem, [], []> = (set): ISystem => {
@@ -43,34 +36,24 @@ export const systemSlice: StateCreator<ISystem, [], []> = (set): ISystem => {
         };
       });
     },
+    setLoginId: (action: string) => {
+      //@ts-ignore
+      return set((state) => {
+        storage.set("loginId", JSON.stringify(action));
+        return {
+          system: {
+            ...get(state, "system"),
+            loginId: action,
+          },
+        };
+      });
+    },
     changeTheme: (action: string) => {
       return set((state: any) => {
         return {
           system: {
             ...get(state, "system"),
             theme: action,
-          },
-        };
-      });
-    },
-    toggleSidebar: (action: string) => {
-      return set((state: any) => {
-        storage.set("toggleSidebar", action);
-        return {
-          system: {
-            ...get(state, "system"),
-            toggleSidebar: action,
-          },
-        };
-      });
-    },
-    attemptStatus: (action: string) => {
-      return set((state: any) => {
-        storage.set("attemptStatus", action);
-        return {
-          system: {
-            ...get(state, "system"),
-            attemptStatus: action,
           },
         };
       });
