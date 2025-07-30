@@ -9,6 +9,12 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
+    {
+    key: "dashboard",
+    label: "Dashboard",
+    icon: <AppstoreOutlined />,
+    route: "/",
+  },
   {
     key: "students",
     label: "O'quvchilar",

@@ -40,13 +40,13 @@ const DefaultPage = () => {
         <div className="left-part w-[500px] text-[18px] dark:text-[#9EA3B5]">
           <div className="flex justify-between">
             <p className="mb-[10px]">{t("Admin's telegram:")} </p>
-            <a
+            {/* <a
               className="text-[#222638]"
-              href="https://t.me/uzcontest_support"
+              href=""
               target="_blank"
             >
-              {t("Support @uzcontest_support")}
-            </a>
+              {t("Support ")}
+            </a> */}
           </div>
         </div>
       </div>

@@ -42,9 +42,9 @@ const Navigation2: React.FC = () => {
   return (
     <div className="h-full bg-no-repeat bg-cover bg-left">
       <div className="flex justify-center text-center cursor-pointer pt-[20px] text-[#9EA3B5]">
-        <Link to="/">
+        {/* <Link to="/">
           <img className="w-[205px]" src={logo} alt="logo" />
-        </Link>
+        </Link> */}
       </div>
       <div className={"h-[80vh] overflow-y-scroll no-scrollbar"}>
         {/* {filterMenuItems(helpers.menuItems, filterKeys).map((menuItem, i) => ( */}

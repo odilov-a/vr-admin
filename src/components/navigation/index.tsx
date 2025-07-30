@@ -43,11 +43,11 @@ const Navigation: React.FC = () => {
       style={{ transition: "none" }}
     >
       <div className="flex items-center justify-center text-center text-[20px] font-[500] mt-[30px] mb-[25px] cursor-pointer dark:text-[#002855]">
-        <img
+        {/* <img
           src={logo}
           alt="Logo"
           className="mr-2 w-6 h-6 inline-block align-middle"
-        />
+        /> */}
       </div>
       {items.map((menuItem, i) => (
         <React.Fragment key={menuItem.key + i}>
