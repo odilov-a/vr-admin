@@ -7,7 +7,7 @@ import FileUploadEmpower2 from "./fileUploadEmpower2";
 import FileUpload1 from "./fileUpload";
 import AsyncSelect from "./ant-async-select";
 import Textarea from "./textarea";
-import Switch from "./switch";
+import Switch from "./Switch";
 import FileUpload3 from "./fileUpload3";
 import testUpload from "./testUpload";
 import Ckeditor from "./Ckeditor";
