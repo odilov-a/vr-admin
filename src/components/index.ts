@@ -7,7 +7,7 @@ import Table from "./table";
 import Modal from "./modal";
 import Button from "./button";
 import Img from "./img";
-import DotBtn from "./DotBtn"
+import DotBtn from "./dotBtn"
 
 import {
   AntInput,
