@@ -39,7 +39,6 @@
     "zustand": "^4.3.9"
   },
   "scripts": {
-    "vercel-build": "npm install --legacy-peer-deps && react-scripts build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
