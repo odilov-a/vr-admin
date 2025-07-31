@@ -10,7 +10,7 @@ import Textarea from "./textarea";
 import Switch from "./Switch";
 import FileUpload3 from "./fileUpload3";
 import testUpload from "./testUpload";
-import Ckeditor from "./Ckeditor";
+import Ckeditor from "./ckeditor";
 import FileUpload from "./fileUploadReact2";
 
 export default {
