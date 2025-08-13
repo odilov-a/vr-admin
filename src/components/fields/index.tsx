@@ -12,6 +12,7 @@ import FileUpload3 from "./fileUpload3";
 import testUpload from "./testUpload";
 import Ckeditor from "./ckeditor";
 import FileUpload from "./fileUploadReact2";
+import PdfUploadField from "./pdfUpload";
 
 export default {
   Input,
@@ -27,5 +28,6 @@ export default {
   FileUpload3,
   testUpload,
   Ckeditor,
-  FileUpload
+  FileUpload,
+  PdfUploadField,
 };

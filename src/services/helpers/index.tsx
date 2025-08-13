@@ -28,6 +28,12 @@ const menuItems: MenuItem[] = [
     route: "/books",
   },
   {
+    key: "news",
+    label: "Yangiliklar",
+    icon: <AppstoreOutlined />,
+    route: "/news",
+  },
+  {
     key: "organs",
     label: "Organlar",
     icon: <AppstoreOutlined />,

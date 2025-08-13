@@ -1,3 +1,5 @@
+import News from "pages/news";
+import NewsUpdate from "pages/news/update";
 import { lazy } from "react";
 const User = lazy(() => import("pages/admin"));
 const Default = lazy(() => import("pages/default"));
@@ -64,6 +66,25 @@ const privateRoutes: IRoute[] = [
     key: "books-update",
     title: "Kitob o'zgartirish",
     element: <BookUpdate />,
+  },
+
+   {
+    path: "/news",
+    key: "news",
+    title: "Yangiliklar",
+    element: <News />,
+  },
+  {
+    path: "/news/create",
+    key: "news-create",
+    title: "Yangilik qo'shish",
+    element: <NewsUpdate />,
+  },
+  {
+    path: "/news/update/:id",
+    key: "news-update",
+    title: "Yangilikni o'zgartirish",
+    element: <NewsUpdate />,
   },
 
   {

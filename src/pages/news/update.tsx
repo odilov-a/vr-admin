@@ -8,7 +8,7 @@ import { utils } from "services";
 
 const { TabPane } = Tabs;
 
-const Update = () => {
+const NewsUpdate = () => {
   const { get, t, navigate, location, params } = useHooks();
   const [selectedLang, setSelectedLang] = useState("O'z");
   const isUpdate = utils.extractBaseUrl(location.pathname) === "/books/update";
@@ -28,15 +28,15 @@ const Update = () => {
   return (
     <div>
       <Container.Form
-        url={isUpdate && data ? `/books/${get(data, "_id")}` : "/books"}
+        url={isUpdate && data ? `/news/${get(data, "_id")}` : "/news"}
         name="books"
         method={isUpdate ? "put" : "post"}
         fields={[
           {
             type: "string",
             required: true,
-            name: "nameUz",
-            value: get(data, "nameUz"),
+            name: "titleUz",
+            value: get(data, "titleUz"),
           },
           {
             type: "string",
@@ -47,8 +47,8 @@ const Update = () => {
           {
             type: "string",
             required: true,
-            name: "nameRu",
-            value: get(data, "nameRu"),
+            name: "titleRu",
+            value: get(data, "titleRu"),
           },
           {
             type: "string",
@@ -59,8 +59,8 @@ const Update = () => {
           {
             type: "string",
             required: true,
-            name: "nameEn",
-            value: get(data, "nameEn"),
+            name: "titleEn",
+            value: get(data, "titleEn"),
           },
           {
             type: "string",
@@ -69,26 +69,15 @@ const Update = () => {
             value: get(data, "descriptionEn"),
           },
           {
-            type: "number",
-            required: true,
-            name: "price",
-            value: get(data, "price"),
-          },
-          {
             type: "array",
             required: true,
             name: "photoUrls",
             value: get(data, "photoUrls"),
           },
-          {
-            type: "array",
-            required: true,
-            name: "pdfUrls",
-            value: get(data, "pdfUrls"),
-          },
+
         ]}
         onSuccess={() => {
-          navigate("/books");
+          navigate("/news");
         }}
         onError={(error) => {
           notification.error({
@@ -108,7 +97,7 @@ const Update = () => {
                   <Button
                     title={t("Bekor qilish")}
                     className="mr-[20px]"
-                    onClick={() => navigate("/books")}
+                    onClick={() => navigate("/news")}
                   />
                   <Button
                     title={isUpdate ? t("Saqlash") : t("Tasdiqlash")}
@@ -126,7 +115,7 @@ const Update = () => {
                     <div>
                       <Field
                         type="text"
-                        name="nameUz"
+                        name="titleUz"
                         label={t("Name (uz)")}
                         component={Fields.Input}
                         placeholder={t("uz sarlavhani kiriting")}
@@ -146,7 +135,7 @@ const Update = () => {
                     <div>
                       <Field
                         type="text"
-                        name="nameRu"
+                        name="titleRu"
                         label={t("Name (ru)")}
                         component={Fields.Input}
                         placeholder={t("ru sarlavhani kiriting")}
@@ -166,7 +155,7 @@ const Update = () => {
                     <div>
                       <Field
                         type="text"
-                        name="nameEn"
+                        name="titleEn"
                         label={t("Name (en)")}
                         component={Fields.Input}
                         placeholder={t("en sarlavhani kiriting")}
@@ -183,16 +172,7 @@ const Update = () => {
                     </div>
                   </TabPane>
                   <TabPane tab="Image" key="File">
-                    <div className="flex items-center">
-                      <Field
-                        type="number"
-                        name="price"
-                        label={t("Price")}
-                        component={Fields.Input}
-                        placeholder={t("Narxni kiriting")}
-                        className="mr-[30px]"
-                      />
-                    </div>
+             
                     <div className="flex items-center justify-content-between g-4">
                       <Field
                         name="photoUrls"
@@ -202,16 +182,7 @@ const Update = () => {
                         className="mr-[30px]"
                       />
                       </div>
-                      <div className="p">
-                        
-                      <Field
-                        name="pdfUrls"
-                        placeholder={t(".PDF file qo'shish")}
-                        multiple={true}
-                        component={Fields.PdfUploadField}
-                        className="mr-[30px] mt-3"
-                      />
-                    </div>
+                     
                   </TabPane>
                 </Tabs>
               </div>
@@ -223,4 +194,4 @@ const Update = () => {
   );
 };
 
-export default Update;
+export default NewsUpdate;
